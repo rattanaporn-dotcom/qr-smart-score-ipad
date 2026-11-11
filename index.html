@@ -58,7 +58,17 @@
             document.getElementById("result").textContent =
               "อ่าน QR ได้: " + decodedText;const appUrl = "https://script.google.com/a/macros/anubanphatthalung.ac.th/s/AKfycbw-ZzO_bChI2mJ3wbe4fUXyHO1jXLh6qw7FhgHfoSvrRTTyaUp3Jc_ZVUYVaLvdH67s/exec";
 
-const targetUrl = appUrl + "?qr=" + encodeURIComponent(decodedText);window.location.href = targetUrl;
+const targetUrl = appUrl + "?qr=" + encodeURIComponent(decodedText);
+if (window.opener) {
+  window.opener.postMessage(
+    {
+      type: "QR_SMART_SCORE",
+      code: decodedText
+    },
+    "*"
+  );
+}
+
 
 document.getElementById("result").textContent =
   "อ่าน QR ได้: " + decodedText;
